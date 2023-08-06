@@ -15,7 +15,7 @@
 You can install PyConttractUI using pip:
 
 ```bash
-pip install py-conttract-ui
+pip install py-contract-ui
 
 ```
 ## Serving the GUI on Local server
