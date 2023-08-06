@@ -1,0 +1,2 @@
+include src/py_contract_ui/template/template.j2
+include src/py_contract_ui/public/*
