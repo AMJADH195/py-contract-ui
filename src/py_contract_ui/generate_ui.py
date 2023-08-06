@@ -123,9 +123,6 @@ def generate_ui_files(output_directory,rendered_template):
         file.write(rendered_template)
     
 
-
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Convert contract ABI to Interactive GUI')
     parser.add_argument('--contract', type=str, help='Path to the JSON file or directory')
@@ -166,7 +163,10 @@ def main():
     if args.serve:
         # Define the FastAPI app and the route to serve the template
         app = FastAPI()
-        app.mount("/public", StaticFiles(directory="public"), name="public")
+        package_directory = os.path.dirname(__file__)
+        # Get the path of the 'public' directory
+        public_directory = os.path.join(package_directory, 'public')
+        app.mount("/public", StaticFiles(directory=public_directory), name="public")
         @app.get("/", response_class=HTMLResponse)
         def read_item():
             return rendered_template
@@ -174,6 +174,7 @@ def main():
         uvicorn.run(app, host="0.0.0.0", port=8000)
 
     generate_ui_files(output_dir,rendered_template)
+
 
 if __name__ == '__main__':
     main()
